@@ -12,18 +12,19 @@ var args = require('../index.js')({
 
 console.log(args);
 
-process.argv = ['node', 'test/index.js', '-a', '0'];
 
 try {
-var args = require('../index.js')({
-  name: {
-    type: String,
-    required: true,
-    description: 'product name'
-  },
-  amount: Number,
-  options: [String]
-});
+  var args = require('../index.js')({
+    name: {
+      type: String,
+      required: true,
+      description: 'product name'
+    },
+    amount: Number,
+    options: [String]
+  }, {
+    argv: ['-a', '0']
+  });
 
 } catch (e) {
   console.log(e);

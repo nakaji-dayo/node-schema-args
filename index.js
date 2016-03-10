@@ -2,7 +2,7 @@ var _ = require('lodash');
 var paramCase = require('param-case');
 
 module.exports = (schema, settings) => {
-  var argv = process.argv.splice(2);
+  var argv = _.get(settings, 'argv', process.argv.splice(2));
   // parse schema
   var opts = _.reduce(schema, (acc, v, k) => {
     var s = {
