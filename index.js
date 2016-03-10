@@ -30,7 +30,15 @@ module.exports = (schema, settings) => {
       }
     } else {
       if (acc.opt) {
-        acc.res[acc.opt.key] = parse(acc.opt.type, x);
+        if (Array.isArray(acc.opt.type)) {
+          if (acc.res[acc.opt.key]) {
+            acc.res[acc.opt.key].push(parse(acc.opt.type, x));
+          } else {
+            acc.res[acc.opt.key] = [parse(acc.opt.type, x)];
+          }
+        } else {
+          acc.res[acc.opt.key] = parse(acc.opt.type, x);
+        }
       }
     }
     return acc;

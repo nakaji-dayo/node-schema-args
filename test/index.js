@@ -1,32 +1,42 @@
-process.argv = ['node', 'test/index.js', '--name', 'beer', '-a', '999', '--options', 'a', '8', '0.98', '-e'];
+var parser = require('../lib/index.js');
+var should = require('chai').should();
 
-var args = require('../index.js')({
-  name: {
-    type: String,
-    required: true,
-    description: 'product name'
-  },
-  amount: Number,
-  exists: Boolean,
-  options: [String]
-});
-
-console.log(args);
-
-
-try {
-  var args = require('../index.js')({
-    name: {
-      type: String,
-      required: true,
-      description: 'product name'
-    },
-    amount: Number,
-    options: [String]
-  }, {
-    argv: ['-a', '0']
+describe('schema-args', () => {
+  it ('parse process.argv', () => {
+    process.argv = ['node', 'test/index.js', '--name', 'beer', '-a', '999', '--options', 'a', '8', 'c', '-e'];
+    var args = parser({
+      name: {
+        type: String,
+        required: true,
+        description: 'product name'
+      },
+      amount: Number,
+      exists: Boolean,
+      options: [String]
+    });
+    args.name.should.equal('beer');
+    args.amount.should.equal(999);
+    args.options.should.deep.equal(['a', '8', 'c']);
+    args.exists.should.be.true;
   });
 
-} catch (e) {
-  console.log(e);
-}
+  it ('required', () => {
+    
+    try {
+      args = parser('../index.js')({
+        name: {
+          type: String,
+          required: true,
+          description: 'product name'
+        },
+        amount: Number,
+        options: [String]
+      }, {
+        argv: ['-a', '0']
+      });
+
+    } catch (e) {
+      console.log(e);
+    }
+  });
+});
