@@ -20,10 +20,9 @@ describe('schema-args', () => {
     args.exists.should.be.true;
   });
 
-  it ('required', () => {
-    
-    try {
-      args = parser('../index.js')({
+  it ('required', () => {    
+    (() => {
+      parser({
         name: {
           type: String,
           required: true,
@@ -34,9 +33,16 @@ describe('schema-args', () => {
       }, {
         argv: ['-a', '0']
       });
+    }).should.throw(/not enough args/);
+  });
 
-    } catch (e) {
-      console.log(e);
-    }
+  it ('help opt', () => {
+    (() => {
+      parser({
+        amount: Number
+      }, {
+        argv: ['--help']
+      });
+    }).should.throw(/help is shown/);
   });
 });

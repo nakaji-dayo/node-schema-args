@@ -1,8 +1,11 @@
 var _ = require('lodash');
 var paramCase = require('param-case');
 
+// parse
 module.exports = (schema, settings) => {
   var argv = _.get(settings, 'argv', process.argv.splice(2));
+  //default schema
+  _.defaults(schema, {'__help': helpOption});
   // parse schema
   var opts = _.reduce(schema, (acc, v, k) => {
     var s = {
@@ -48,9 +51,15 @@ module.exports = (schema, settings) => {
     console.log(makeMan(opts, settings));
     throw new Error('not enough args');
   }
+  // show help
+  if (res.__help) {
+    console.log(makeMan(opts, settings));
+    throw new Error('help is shown');
+  }
   return res;
 };
 
+//parse value with type
 var parse = (type, v) => {
   switch (type) {
   case Number:
@@ -60,6 +69,7 @@ var parse = (type, v) => {
   }
 };
 
+//`usage` string
 var makeMan = (opts, settings) => {
   return 'Usage: \n' + (settings ? settings + '\n' : '') +
     _.map(opts.l, (v, k) => k + (v.short ? ', ' + v.short : '') +
@@ -68,5 +78,12 @@ var makeMan = (opts, settings) => {
     .join('\n');
 };
 
+// name of type
 var typeName = t => Array.isArray(t) ? `[${t[0].name}]` : t.name;
 
+
+// help option
+var helpOption = {
+  type: Boolean,
+  description: 'show help'
+};
