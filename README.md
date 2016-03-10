@@ -1,6 +1,10 @@
 # node-schema-args
 
-```js: app.js
+## example
+
+app.js
+
+```js:app.js
 var args = require('schema-args')({
   name: {
     type: String,
@@ -14,10 +18,18 @@ var args = require('schema-args')({
 console.log(args);
 ```
 
-```
-> node app.js --name beer -a 999 --options a 8 c -e
+```sh
+$ node app.js --name beer -a 999 --options a 8 c -e
 { name: 'beer',
   amount: 999,
   options: [ 'a', '8', 'c' ],
   exists: true }
+
+$ node app.js --name beer -a 999 --options a 8 c -e
+Usage: 
+--name, -n*: product name (String)
+--amount, -a:  (Number)
+--exists, -e:  (Boolean)
+--options, -o:  ([String])
+--help, -_: show help (Boolean)
 ```

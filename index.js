@@ -46,15 +46,15 @@ module.exports = (schema, settings) => {
     }
     return acc;
   }, {res: {}, opt: null}).res;
-  //validate required
-  if (_.values(opts.l).some(x => x.required && !res[x.key])) {
-    console.log(makeMan(opts, settings));
-    throw new Error('not enough args');
-  }
   // show help
   if (res.__help) {
     console.log(makeMan(opts, settings));
     throw new Error('help is shown');
+  }
+  //validate required
+  if (_.values(opts.l).some(x => x.required && !res[x.key])) {
+    console.log(makeMan(opts, settings));
+    throw new Error('not enough args');
   }
   return res;
 };

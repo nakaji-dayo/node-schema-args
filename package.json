@@ -9,7 +9,7 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
     "pretest": "npm run dist",
-    "dist": "babel index.js -d lib"
+    "dist": "babel index.js -d lib && ./docs/make_readme.sh"
   },
   "repository": {
     "type": "git",
