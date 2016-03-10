@@ -10,8 +10,7 @@ result=`eval ${command}`
 command_=`echo $command | resolvAppJS`
 helpCommand='node ./docs/app.js --help 2> /dev/null'
 helpResult=`eval ${helpCommand}`
-helpCommand_=`echo $command | resolvAppJS`
-
+helpCommand_=`echo $helpCommand | resolvAppJS`
 cat > README.md <<EOF
 # node-schema-args
 

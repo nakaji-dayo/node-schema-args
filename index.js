@@ -3,7 +3,8 @@ var paramCase = require('param-case');
 
 // parse
 module.exports = (schema, settings) => {
-  var argv = _.get(settings, 'argv', process.argv.splice(2));
+  settings = settings || {};
+  var argv = settings.argv || process.argv.splice(2);
   //default schema
   _.defaults(schema, {'__help': helpOption});
   // parse schema
