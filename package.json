@@ -1,5 +1,5 @@
 {
-  "name": "node-schema-args",
+  "name": "schema-args",
   "version": "1.0.0",
   "description": "command line arguments parser with schema",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nakaji-dayo"
+    "url": "https://github.com/nakaji-dayo/node-schema-args"
   },
   "keywords": [
     "commandline",
