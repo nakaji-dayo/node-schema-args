@@ -1,0 +1,28 @@
+{
+  "name": "node-schema-args",
+  "version": "1.0.0",
+  "description": "command line arguments parser with schema",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nakaji-dayo"
+  },
+  "keywords": [
+    "commandline",
+    "parser",
+    "args",
+    "argv"
+  ],
+  "author": "nakaji-dayo",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.6.1",
+    "param-case": "^1.1.2"
+  }
+}
