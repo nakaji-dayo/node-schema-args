@@ -19,7 +19,7 @@ cat > README.md <<EOF
 
 app.js
 
-\`\`\`js:app.js
+\`\`\`javascript
 ${js}
 \`\`\`
 
