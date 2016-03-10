@@ -4,7 +4,7 @@
 
 app.js
 
-```javascript:app.js
+```
 var args = require('schema-args')({
   name: {
     type: String,
