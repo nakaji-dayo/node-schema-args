@@ -1,4 +1,4 @@
-process.argv = ['node', 'test/index.js', '--name', 'beer', '-a', '999', '--options', 'a', '8', '0.98'];
+process.argv = ['node', 'test/index.js', '--name', 'beer', '-a', '999', '--options', 'a', '8', '0.98', '-e'];
 
 var args = require('../index.js')({
   name: {
@@ -7,6 +7,7 @@ var args = require('../index.js')({
     description: 'product name'
   },
   amount: Number,
+  exists: Boolean,
   options: [String]
 });
 

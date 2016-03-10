@@ -22,7 +22,11 @@ module.exports = (schema, settings) => {
     if (x.indexOf('--') == 0 || x.indexOf('-') == 0) {
       var opt = opts.l[x] || opts.s[x]; //FIXIT: one
       if (opt) {
-        acc.opt = opt;
+        if (opt.type == Boolean) {
+          acc.res[opt.key] = true;
+        } else {
+          acc.opt = opt;
+        }
       }
     } else {
       if (acc.opt) {
