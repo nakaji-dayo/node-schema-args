@@ -26,10 +26,5 @@ $ node app.js --name beer -a 999 --options a 8 c -e
   exists: true }
 
 $ node app.js --name beer -a 999 --options a 8 c -e
-Usage: 
---name, -n*: product name (String)
---amount, -a:  (Number)
---exists, -e:  (Boolean)
---options, -o:  ([String])
---help, -_: show help (Boolean)
+
 ```

@@ -41,6 +41,7 @@ describe('schema-args', () => {
       parser({
         amount: Number
       }, {
+        binName: 'node hoge.js',
         argv: ['--help']
       });
     }).should.throw(/help is shown/);

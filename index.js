@@ -15,9 +15,11 @@ module.exports = (schema, settings) => {
       description: v.description
     };
     acc.l['--' + paramCase(k)] = s;
-    var short = '-' + k.charAt(0);
-    acc.s[short] = s;    
-    s.short = short;
+    if (!v.noShort) {
+      var short = '-' + k.charAt(0);
+      acc.s[short] = s;    
+      s.short = short;
+    }
     return acc;
   }, {l: {}, s: {}});
   // parse argv
@@ -71,11 +73,13 @@ var parse = (type, v) => {
 
 //`usage` string
 var makeMan = (opts, settings) => {
-  return 'Usage: \n' + (settings ? settings + '\n' : '') +
-    _.map(opts.l, (v, k) => k + (v.short ? ', ' + v.short : '') +
-          (v.required ? '*' : '') + ': ' +
-          (v.description || '') + ' (' + (typeName(v.type || v)) + ')')
-    .join('\n');
+  return 'Usage: ' + (settings.binName ? settings.binName : '') + '\n' +
+    'Options:' + '\n' + 
+    _.map(opts.l, (v, k) => ' ' + k + (v.short ? ', ' + v.short : '') +
+          ': ' +
+          (v.description || '') + ' (' + (typeName(v.type || v)) + ')' +
+          (v.required ? ' *' : '')
+         ).join('\n');
 };
 
 // name of type
@@ -85,5 +89,6 @@ var typeName = t => Array.isArray(t) ? `[${t[0].name}]` : t.name;
 // help option
 var helpOption = {
   type: Boolean,
-  description: 'show help'
+  description: 'show help',
+  noShort: true
 };
