@@ -2,12 +2,13 @@
   "name": "schema-args",
   "version": "1.0.0",
   "description": "command line arguments parser with schema",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "dist": "babel index.js -d lib"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
   "dependencies": {
     "lodash": "^4.6.1",
     "param-case": "^1.1.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5"
   }
 }
