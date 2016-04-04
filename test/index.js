@@ -46,4 +46,22 @@ describe('schema-args', () => {
       });
     }).should.throw(/help is shown/);
   });
+
+  it ('position args', () => {
+    var args = parser({
+      first: {
+        type: String,
+        index: 0
+      },
+      last: {
+        type: String,
+        index: 1
+      }
+    }, {
+      binName: 'node hoge.js',
+      argv: ['daishi', 'nakajima']
+    });
+    args.first.should.equal('daishi');
+    args.last.should.equal('nakajima');
+  });
 });

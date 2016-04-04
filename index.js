@@ -13,7 +13,8 @@ module.exports = (schema, settings) => {
       key: k,
       type: v.type ? v.type : v,
       required: !!v.required,
-      description: v.description
+      description: v.description,
+      index: v.index
     };
     acc.l['--' + paramCase(k)] = s;
     if (!v.noShort) {
@@ -24,7 +25,7 @@ module.exports = (schema, settings) => {
     return acc;
   }, {l: {}, s: {}});
   // parse argv
-  var res = argv.reduce((acc, x) => {
+  var res = argv.reduce((acc, x, index) => {
     if (x.indexOf('--') == 0 || x.indexOf('-') == 0) {
       var opt = opts.l[x] || opts.s[x]; //FIXIT: one
       if (opt) {
@@ -45,6 +46,11 @@ module.exports = (schema, settings) => {
         } else {
           acc.res[acc.opt.key] = parse(acc.opt.type, x);
         }
+      } else {
+        //position args
+        var k = _.findKey(opts.l, x => x.index == index);
+        var opt = opts.l[k];
+        acc.res[opt.key] = parse(opt.type, x);
       }
     }
     return acc;
