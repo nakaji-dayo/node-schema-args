@@ -1,6 +1,6 @@
 {
   "name": "schema-args",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "command line argument/option parsing with schema",
   "main": "lib/index.js",
   "directories": {

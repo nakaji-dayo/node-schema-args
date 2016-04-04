@@ -80,7 +80,19 @@ var parse = (type, v) => {
 
 //`usage` string
 var makeMan = (opts, settings) => {
-  return 'Usage: ' + (settings.binName ? settings.binName : '') + '\n' +
+  var indexArgs = '';
+  for (var i=0; true; i++) {
+    var k = _.findKey(opts.l, x => x.index == i);
+    if (k) {
+      var opt = opts.l[k];
+      indexArgs += ' ' + opt.key;
+    } else {
+      break;
+    }
+  }
+  
+  return 'Usage: ' + (settings.binName ? settings.binName + indexArgs: '') +
+    '\n' +
     'Options:' + '\n' + 
     _.map(opts.l, (v, k) => ' ' + k + (v.short ? ', ' + v.short : '') +
           ': ' +
